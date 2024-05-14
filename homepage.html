@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>FLIXPICK</title>
+
+</head>
+<body>
+
+<div id="overlay"></div>
+
+<header>
+    <img src="icon_movies.png" alt="Logo Icon" class="logo-icon">
+    <h1 class="title">FLIXPICK</h1>
+</header>
+
+<nav>
+    <a href="homepage.html">HOME</a>
+    <div class="dropdown">
+        <button class="dropbtn">MOVIES</button>
+        <div class="dropdown-content">
+            <a href="#">MOVIE1</a>
+            <a href="#">MOVIE2</a>
+            <a href="#">MOVIE3</a>
+        </div>
+    </div>
+    <a href="#rating">RATING</a>
+    <a href="#watchlist">WATCHLIST</a>
+    <a href="#discussion">DISCUSSION</a>
+</nav>
+
+<div class="search-container">
+    <form action="/search">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit">search</button>
+    </form>
+</div>
+
+<div class="movie-container">
+    <div class="movie-poster">
+        <img src="movie_1.jpg" alt="Movie 1">
+        <div class="movie-details">
+            <button>View Details</button>
+        </div>
+    </div>
+    <div class="movie-poster">
+        <img src="movie_2.jpg" alt="Movie 2">
+        <div class="movie-details">
+            <button>View Details</button>
+        </div>
+    </div>
+    <div class="movie-poster">
+        <img src="movie3.jpg" alt="Movie 3">
+        <div class="movie-details">
+            <button>View Details</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    &copy; 2024 FLIXPICK. All Rights Reserved.
+</footer>
+
+</body>
+</html>
