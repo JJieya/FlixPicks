@@ -2,9 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
     <link rel="stylesheet" type="text/css" href="style.css" />
 
+  <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -12,32 +13,41 @@
       crossorigin="anonymous"
     />
 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>FLIXPICK</title>
   </head>
   <body>
     <div id="overlay"></div>
 
-    <header>
+    <header style="display: inline-flex">
       <img src="icon_movies.png" alt="Logo Icon" class="logo-icon" />
       <h1 class="title">FLIXPICK</h1>
     </header>
 
     <nav>
-      <a href="homepage.html">HOME</a>
-      <div class="dropdown">
-        <button class="dropbtn">MOVIES</button>
-        <div class="dropdown-content">
-          <a href="#">MOVIE1</a>
-          <a href="#">MOVIE2</a>
-          <a href="#">MOVIE3</a>
-        </div>
-      </div>
-      <a href="#rating">RATING</a>
-      <a href="#watchlist">WATCHLIST</a>
-      <a href="#discussion">DISCUSSION</a>
+        <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="homepage.html">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#movies">MOVIES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#rating">RATING</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#discussion">DISCUSSION</a>
+            </li>
+          </ul>
     </nav>
 
-    <div class="search-container">
+    <div class="searchbar">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button style="display: block" type="button" class="btn btn-primary">Search</button>
+      </div>
+
+    <!-- <div class="search-container">
       <form action="/search">
         <input type="text" placeholder="Search.." name="search" />
         <button type="submit">search</button>
@@ -63,7 +73,7 @@
           <button>View Details</button>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <footer>&copy; 2024 FLIXPICK. All Rights Reserved.</footer>
 
