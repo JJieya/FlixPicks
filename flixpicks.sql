@@ -34,7 +34,7 @@ INSERT INTO movie (name, director, release_year, synopsis, poster_url) VALUES
 ('Interstellar', 'Christopher Nolan', 2014, 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival.', 'https://posterspy.com/wp-content/uploads/2022/08/Interstellar_poster.jpg'),
 ('Parasite', 'Bong Joon Ho', 2019, 'Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.', 'https://image.tmdb.org/t/p/original/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg'),
 ('The Godfather', 'Francis Ford Coppola', 1972, 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 'https://image.tmdb.org/t/p/original/3bhkrj58Vtu7enYsRolD1fZdja1.jpg'),
-('Pulp Fiction', 'Quentin Tarantino', 1994, 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.', 'https://cdn.posteritati.com/posters/000/000/062/585/pulp-fiction-md-web.jpg');
+('Pulp Fiction', 'Quentin Tarantino', 1994, 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.', 'https://image.tmdb.org/t/p/original/wZbnRMarWnO4DJRisOaK4QEg1tl.jpg');
 
 
 -- Create rating table
