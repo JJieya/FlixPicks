@@ -25,25 +25,26 @@ include 'db_connection.php';
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
+
      
+
+    <style>
     /* Styling for movie container */
     .movie {
         /* Positioning and alignment */
-        position: relative;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        /* Fixed height for container */
-        height: 500px; 
+        /* Ensure container height adjusts based on content */
+        height: auto;
+        margin-bottom: 20px;
     }
 
     /* Styling for movie poster image */
     .movie img {
         /* Make the image fill the container */
-        width: 100%; 
-        height: 100%;
+        width: 100%;
+        height: auto;
         object-fit: cover;
         /* Remove default border and ensure block display */
         border: 0px solid #ddd;
@@ -51,14 +52,11 @@ include 'db_connection.php';
     }
 
     /* Styling for movie title */
-    .movie h2 {
-        /* Position the title at the bottom */
-        position: absolute;
-        bottom: 0;
-        left: 0;
+    .movie-title {
+        /* Full width */
         width: 100%;
         /* Semi-transparent background */
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.7);
         /* Text color */
         color: white;
         /* Remove margin and add padding */
@@ -66,7 +64,11 @@ include 'db_connection.php';
         padding: 10px;
         text-align: center;
         /* Font size */
-        font-size: 1rem;
+        font-size: 1.3rem;
+         /* Text shadow for effect */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        /* Additional font style */
+        font-weight: bold;
     }
 
     /* Styling for main container */
@@ -75,14 +77,16 @@ include 'db_connection.php';
         padding-top: 20px;
         padding-bottom: 50px;
         /* Set maximum height and enable vertical scrollbar */
-        max-height: 600px; 
-        overflow-y: auto; 
+        max-height: 600px;
+        overflow-y: auto;
     }
 
     /* Adjust row margins */
     .row {
         margin-left: -15px;
         margin-right: -15px;
+        margin-bottom: 20px;
+        padding: 10px;
     }
 
     /* Adjust column padding */
@@ -90,7 +94,7 @@ include 'db_connection.php';
         padding-left: 15px;
         padding-right: 15px;
         /* Ensure consistent height for movie containers */
-        height:500px;
+        height: auto;
     }
 
     /* Remove margin for last row */
@@ -103,8 +107,7 @@ include 'db_connection.php';
         /* Add margin to top */
         margin-top: 20px;
     }
-
-</style>
+    </style>
 
 </head>
 
@@ -151,7 +154,8 @@ include 'db_connection.php';
                     echo '<div class="movie">';
                     echo '<a href="movie_detail.php?id=' . $row["id"] . '">';
                     echo '<img src="' . $row["poster_url"] . '" alt="' . $row["name"] . '">';
-                    echo '<h2>' . $row["name"] . '</h2>';
+                    echo '</a>'; // Closing the anchor tag
+                    echo '<div class="movie-title">' . $row["name"] . '</div>';
                     echo '</div>';
                     echo '</div>';
                 }
