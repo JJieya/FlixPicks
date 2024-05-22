@@ -57,58 +57,16 @@ $conn->close();
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .container {
-            margin-top: 50px;
+            margin-top: 100px;
+            padding:20px;
             max-width: 900px;
-            min-height: 800px; /* 设置最小高度 */
-            margin-bottom: 200px;
+            background-color:white;
+            margin-bottom: 100px;
         }
-        .movie-title {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .movie-title h1 {
-            text-transform: uppercase; /* 全部变大写 */
-            font-weight: bold; /* 加粗 */
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* 立体效果 */
-            letter-spacing: 2px; /* 字母间距 */
-            color: green;
-        }
-        .movie-details {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            margin-left: 15px;
-            margin-right: 15px;
-            position: relative;
-            background-color: rgba(0, 0, 0, 0.2);
-            color: white;
-        }
-        .movie-details img {
-            max-width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-        .details {
-            display: flex;
-            flex-direction: column;
-            justify-content: left;
-            padding-left: 20px;
-            padding-right: 50px;
-        }
-        .col-md-8.details {
-        }
-        .details h3,
-        .details h4,
-        .details p {
-            font-size: 20px;
-            margin-top: 5px;
-        }
-        .details p {
-            text-align: left;
-        }
+
         .ratings {
             margin-top: 50px;
+            margin-bottom:50px;
         }
         .ratings h2 {
             margin-bottom: 20px;
@@ -145,6 +103,7 @@ $conn->close();
     </style>
 </head>
 <body>
+    <div id="overlay"></div> 
     <header style="display: inline-flex; width: 100%;">
         <img src="icon_movies.png" alt="Logo Icon" class="logo-icon" />
         <h1 class="title">FLIXPICK</h1>
@@ -171,7 +130,54 @@ $conn->close();
         </ul>
     </nav>
 
-    <div class="container">
+    <!-- Bootstrap template from free resource and modified by my own design -->
+    <section class="container">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="<?php echo htmlspecialchars($movie['name']); ?>" /></div>
+                    <div class="col-md-6">
+                        <h1 class="display-5 fw-bolder"><?php echo htmlspecialchars($movie['name']); ?></h1>
+                        <div class="fs-5 mb-5">
+                            <span class="text-decoration-line-through">Directed by: <?php echo htmlspecialchars($movie['director']); ?></span>
+                        </div>
+                        <div class="fs-5 mb-5">
+                            <span class="text-decoration-line-through">Released in: <?php echo htmlspecialchars($movie['release_year']); ?></span>
+                        </div>
+                        <p class="lead"><?php echo htmlspecialchars($movie['synopsis']); ?></p>
+                        <div class="d-flex">
+            
+                            <button class="btn btn-outline-dark flex-shrink-0" type="button"
+                                onclick="checkLogin(<?php echo $movie_id; ?>)">Rate This Movie
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ratings">
+                <h2>Ratings and Reviews</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Rating</th>
+                            <th>Review</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($ratings as $rating) : ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($rating['user_name']); ?></td>
+                                <td><?php echo htmlspecialchars($rating['star_rating']); ?> Stars</td>
+                                <td><?php echo htmlspecialchars($rating['review_comment']); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+    </section>
+
+   <!-- <div class="container">
         <div class="movie-title">
             <h1><?php echo htmlspecialchars($movie['name']); ?></h1>
         </div>
@@ -185,33 +191,8 @@ $conn->close();
                 <p><?php echo htmlspecialchars($movie['synopsis']); ?></p>
             </div>
         </div>
+    -->
 
-        <div class="ratings">
-            <h2>Ratings and Reviews</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>Rating</th>
-                        <th>Review</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($ratings as $rating) : ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($rating['user_name']); ?></td>
-                            <td><?php echo htmlspecialchars($rating['star_rating']); ?> Stars</td>
-                            <td><?php echo htmlspecialchars($rating['review_comment']); ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="rate-btn-container">
-            <button class="btn btn-primary rate-btn" onclick="checkLogin(<?php echo $movie_id; ?>)">Rate This Movie</button>
-        </div>
-    </div>
 
     <footer class="footer">
         <div>
