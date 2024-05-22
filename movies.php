@@ -13,7 +13,7 @@ include 'db_connection.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies</title>
-    <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="style_moviedetail.css" >
      <!-- Bootstrap CSS -->
     <link
     rel="stylesheet"
@@ -25,8 +25,6 @@ include 'db_connection.php';
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-
-     
 
     <style>
     /* Styling for movie container */
@@ -47,7 +45,7 @@ include 'db_connection.php';
         height: auto;
         object-fit: cover;
         /* Remove default border and ensure block display */
-        border: 0px solid #ddd;
+        border: 1px solid #ddd;
         display: block;
     }
 
@@ -100,12 +98,6 @@ include 'db_connection.php';
     /* Remove margin for last row */
     .last-row {
         margin-bottom: 0;
-    }
-
-    /* Styling for footer */
-    .footer {
-        /* Add margin to top */
-        margin-top: 20px;
     }
     </style>
 
