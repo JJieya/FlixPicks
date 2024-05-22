@@ -118,9 +118,6 @@ include 'db_connection.php';
             <a class="nav-link active" href="movies.php">MOVIES</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#rating">RATING</a>
-            </li>
-            <li class="nav-item">
             <a class="nav-link" href="#discussion">DISCUSSION</a>
             </li>
         </ul>
