@@ -1,67 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+    <link rel="stylesheet" type="text/css" href="style_3.css" />
+
+  <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>FLIXPICK</title>
+  </head>
+  <body>
+    <div id="overlay"></div>
 
-</head>
-<body>
+    <header style="display: inline-flex">
+      <img src="icon_movies.png" alt="Logo Icon" class="logo-icon" />
+      <h1 class="title">FLIXPICK</h1>
+    </header>
 
-<div id="overlay"></div>
+    <nav>
+        <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="homepage.html">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="movies.php">MOVIES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#rating">RATING</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#discussion">DISCUSSION</a>
+            </li>
+          </ul>
+    </nav>
 
-<header>
-    <img src="icon_movies.png" alt="Logo Icon" class="logo-icon">
-    <h1 class="title">FLIXPICK</h1>
-</header>
-
-<nav>
-    <a href="homepage.html">HOME</a>
-    <div class="dropdown">
-        <button class="dropbtn">MOVIES</button>
-        <div class="dropdown-content">
-            <a href="#">MOVIE1</a>
-            <a href="#">MOVIE2</a>
-            <a href="#">MOVIE3</a>
-        </div>
+    <div class="searchbar">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-primary">Search</button>
     </div>
-    <a href="#rating">RATING</a>
-    <a href="#watchlist">WATCHLIST</a>
-    <a href="#discussion">DISCUSSION</a>
-</nav>
 
-<div class="search-container">
-    <form action="/search">
-        <input type="text" placeholder="Search.." name="search">
+    <!-- <div class="search-container">
+      <form action="/search">
+        <input type="text" placeholder="Search.." name="search" />
         <button type="submit">search</button>
-    </form>
-</div>
+      </form>
+    </div>
 
-<div class="movie-container">
-    <div class="movie-poster">
-        <img src="movie_1.jpg" alt="Movie 1">
+    <div class="movie-container">
+      <div class="movie-poster">
+        <img src="movie_1.jpg" alt="Movie 1" />
         <div class="movie-details">
-            <button>View Details</button>
+          <button>View Details</button>
+        </div>
+      </div>
+      <div class="movie-poster">
+        <img src="movie_2.jpg" alt="Movie 2" />
+        <div class="movie-details">
+          <button>View Details</button>
+        </div>
+      </div>
+      <div class="movie-poster">
+        <img src="movie3.jpg" alt="Movie 3" />
+        <div class="movie-details">
+          <button>View Details</button>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="row">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Card title 1</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Card title 2</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Card title 3</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+
+    </div> -->
+
+    <div class="card-container">
+        <div class="card">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <h2>Card 1</h2>
+            <p>This is the first card.</p>
+            <div class="movie-details">
+                <button>View Details</button>
+              </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <h2>Card 2</h2>
+            <p>This is the second card.</p>
+            <div class="movie-details">
+                <button>View Details</button>
+              </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <h2>Card 3</h2>
+            <p>This is the third card.</p>
+            <div class="movie-details">
+                <button>View Details</button>
+              </div>
         </div>
     </div>
-    <div class="movie-poster">
-        <img src="movie_2.jpg" alt="Movie 2">
-        <div class="movie-details">
-            <button>View Details</button>
-        </div>
-    </div>
-    <div class="movie-poster">
-        <img src="movie3.jpg" alt="Movie 3">
-        <div class="movie-details">
-            <button>View Details</button>
-        </div>
-    </div>
-</div>
 
-<footer>
-    &copy; 2024 FLIXPICK. All Rights Reserved.
-</footer>
+    <footer>&copy; 2024 FLIXPICK. All Rights Reserved.</footer>
 
-</body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
