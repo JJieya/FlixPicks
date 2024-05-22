@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (password_verify($password, $hashed_password)) {
                         $_SESSION['user_id'] = $user_id;
                         $_SESSION['username'] = $name; // Store username into session
-                        header('Location: homepage_2.html');
+                        header('Location: homepage.html');
                         exit;
                     } else {
                         $error = "Invalid password.";
