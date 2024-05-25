@@ -18,6 +18,14 @@
     />
 
     <title>FLIXPICK</title>
+    <style>
+        /* CSS to change the search button color to green */
+        #search-btn {
+            background-color: green; /* Set the background color to green */
+            border-color: rgb(246, 247, 244); /* Set the border color to green (optional) */
+            color: white; /* Set the text color to white */
+        }
+    </style>
   </head>
   <body>
     <div id="overlay"></div>
@@ -36,79 +44,24 @@
           <a class="nav-link active" href="movies.php" style="color: white;">MOVIES</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#rating" style="color: white;">RATING</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="discussion.php" style="color: white;">DISCUSSION</a>
+          <a class="nav-link active" href="discussion.php" style="color: white;">DISCUSSION</a>
         </li>
       </ul>
     </nav>
 
     <div class="searchbar">
-      <input
-        type="search"
-        class="form-control rounded"
-        placeholder="Search"
-        aria-label="Search"
-        aria-describedby="search-addon"
+      <input 
+         type="search" 
+         id="search-input" 
+         class="form-control rounded" 
+         placeholder="Search" 
+         aria-label="Search" 
+         aria-describedby="search-addon" 
+         list="movie-list"
       />
-      <button type="button" class="btn btn-primary">Search</button>
+      <datalist id="movie-list"></datalist>
+      <button type="button" class="btn btn-primary" id="search-btn">Search</button>
     </div>
-
-    <!-- <div class="search-container">
-      <form action="/search">
-        <input type="text" placeholder="Search.." name="search" />
-        <button type="submit">search</button>
-      </form>
-    </div>
-
-    <div class="movie-container">
-      <div class="movie-poster">
-        <img src="movie_1.jpg" alt="Movie 1" />
-        <div class="movie-details">
-          <button>View Details</button>
-        </div>
-      </div>
-      <div class="movie-poster">
-        <img src="movie_2.jpg" alt="Movie 2" />
-        <div class="movie-details">
-          <button>View Details</button>
-        </div>
-      </div>
-      <div class="movie-poster">
-        <img src="movie3.jpg" alt="Movie 3" />
-        <div class="movie-details">
-          <button>View Details</button>
-        </div>
-      </div>
-    </div> -->
-    <!-- <div class="row">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title 1</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title 2</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title 3</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-
-    </div> -->
 
     <div class="card-container">
       <div class="card">
@@ -159,5 +112,59 @@
       integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
       crossorigin="anonymous"
     ></script>
+
+    <!-- some of source code of this fonctionality is from the internet, then modeified by my own design. -->
+    <script>
+        // Event listener for input changes in the search bar
+        document.getElementById('search-input').addEventListener('input', function() {
+            var query = this.value.trim(); // Get the input value and remove leading/trailing spaces
+            if (query) {
+                // If there is a query, send a fetch request to search.php with the query parameter
+                fetch('search.php?query=' + encodeURIComponent(query))
+                    .then(response => response.json())
+                    .then(data => {
+                        var movieList = document.getElementById('movie-list');
+                        movieList.innerHTML = ''; // Clear previous results
+                        if (data.length > 0) {
+                            // If there are matching results, populate the dropdown list with movie names
+                            data.forEach(movie => {
+                                var movieOption = document.createElement('option');
+                                movieOption.value = movie.name;
+                                movieList.appendChild(movieOption);
+                            });
+                        }
+                    })
+                    .catch(error => console.error('Error fetching movies:', error));
+            } else {
+                // If the search bar is empty, clear the dropdown list
+                var movieList = document.getElementById('movie-list');
+                movieList.innerHTML = ''; // Clear previous results
+            }
+        });
+    
+        // Event listener for the search button click
+        document.getElementById('search-btn').addEventListener('click', function() {
+            var query = document.getElementById('search-input').value.trim(); // Get the search input value and remove leading/trailing spaces
+            if (query) {
+                // If there is a query, send a fetch request to search.php with the query parameter
+                fetch('search.php?query=' + encodeURIComponent(query))
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            // If there are matching results, redirect to the details page of the first matching movie
+                            window.location.href = 'movie_detail.php?id=' + data[0].id;
+                        } else {
+                            // If there are no matching results, display an alert message
+                            alert('No movies found.');
+                        }
+                    })
+                    .catch(error => console.error('Error fetching movies:', error));
+            } else {
+                // If the search bar is empty, display an alert message
+                alert('Please enter a search query.');
+            }
+        });
+    </script>
+  
   </body>
 </html>
