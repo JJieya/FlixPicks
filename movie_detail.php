@@ -269,6 +269,12 @@ $conn->close();
                     <button class="btn btn-outline-dark flex-shrink-0" type="button"
                         onclick="checkLogin(<?php echo $movie_id; ?>)">Rate This Movie
                     </button>
+                    <div style="padding-left: 30px">
+                        <button class="btn btn-outline-success" type="button"
+                            onclick="checkLogin(<?php echo $movie_id; ?>)">Save to Watchlist
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
