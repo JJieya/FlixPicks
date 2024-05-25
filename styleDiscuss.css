@@ -1,173 +1,175 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url("img_background.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  
-  /* Overlay to adjust opacity */
-  #overlay {
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity here */
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
-  
-  header {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    text-align: center;
-    padding: 20px;
-    display: flex;
-    align-items: center; /* Center items vertically */
-  }
-  
-  .logo-icon {
-    width: 45px; /* Adjust size as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px; /* Add spacing between icon and text */
-  }
-  
-  .title {
-    color: #4caf50; /* Green color */
-    font-size: 36px; /* Larger font size */
-    font-weight: bold; /* Bold font weight */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle 3D effect */
-  }
-  
-  nav {
-    background-color: rgba(0, 100, 0, 0.7); /* Dark green with 70% opacity */
-    overflow: hidden;
-  }
-  
-  nav a {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-    transition: background-color 0.3s; /* Smooth transition for background color */
-  }
-  
-  nav a:hover {
-    background-color: #ffd700; /* Golden color */
-  }
-  
-  .searchbar {
-    max-width: 35%;
-    max-height: 50%;
-    margin: auto;
-    /* display: block; */
-    margin-top: 80px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 5px;
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url("img_background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
-  
-  
-  .card-container {
-      width: 100%;
-      min-height: auto;  
-      padding-left: 35px;
-      padding-top: 3%;
-      padding-bottom: 35px;
-  
-      display: flex;
-      justify-content: space-around;
-      align-items: flex-start;
-      gap: 15px; /* Add space between the cards */
-      /* padding: 20px; */
-      margin: auto;
-  }
-  .card{
-      /* background-color: #40380d81;
+/* Overlay to adjust opacity */
+#overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity here */
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+header {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  align-items: center; /* Center items vertically */
+}
+
+.logo-icon {
+  width: 45px; /* Adjust size as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Add spacing between icon and text */
+}
+
+.title {
+  color: #4caf50; /* Green color */
+  font-size: 36px; /* Larger font size */
+  font-weight: bold; /* Bold font weight */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle 3D effect */
+}
+
+nav {
+  background-color: rgba(0, 100, 0, 0.7); /* Dark green with 70% opacity */
+  overflow: hidden;
+}
+
+nav a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+nav a:hover {
+  background-color: #ffd700; /* Golden color */
+}
+
+.searchbar {
+  max-width: 35%;
+  max-height: 50%;
+  margin: auto;
+  /* display: block; */
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-container {
+  width: 100%;
+  min-height: auto;
+  padding-left: 35px;
+  padding-top: 3%;
+  padding-bottom: 35px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 15px; /* Add space between the cards */
+  /* padding: 20px; */
+  margin: auto;
+}
+.card {
+  /* background-color: #40380d81;
       margin-left: 10px; */
-      /* margin: 10px; */
-      /* display: inline;
+  /* margin: 10px; */
+  /* display: inline;
       position: relative; */
-      background-color: white;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      width: 70%; /* Set a fixed width for the cards */
-      padding: 20px;
-      box-sizing: border-box; /* Ensure padding is included in the width */
-      /* transition: transform 0.3s, box-shadow 0.3s; */
-  }
-  
-  /* .card:hover {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 70%; /* Set a fixed width for the cards */
+  padding: 20px;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+  /* transition: transform 0.3s, box-shadow 0.3s; */
+}
+
+/* .card:hover {
       transform: translateY(-10px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   } */
-  
-  .card h2 {
-      margin-top: 0;
-  }
-  
-  .card p {
-      margin-bottom: 0;
-  }
-  
-  .form-label{
-    font-weight: bold;
-    
-  }
-  
-  .movie-container {
-    text-align: center;
-    margin-top: 100px; /* Adjust as needed */
-    margin-bottom: 100px;
-  }
-  
-  .movie-poster {
-    width: 20%;
-    margin: 20px;
-    display: inline-block;
-    position: relative;
-  }
-  
-  .movie-poster img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  .movie-details {
-    left: 0;
-    width: 50%;
-    text-align: center;
-    margin-top: 30px;
-  }
-  
-  .movie-details button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .movie-details button:hover {
-    background-color: #116f15;
-  }
-  
-  footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-  
+
+/* .card h2 {
+  margin-top: 0;
+}
+
+.card p {
+  margin-bottom: 0;
+} */
+
+.form-label {
+  font-weight: bold;
+}
+/* .discuss-body{
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+} */
+.movie-container {
+  text-align: center;
+  margin-top: 100px; /* Adjust as needed */
+  margin-bottom: 100px;
+}
+
+.movie-poster {
+  width: 20%;
+  margin: 20px;
+  display: inline-block;
+  position: relative;
+}
+
+.movie-poster img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.movie-details {
+  left: 0;
+  width: 50%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.movie-details button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.movie-details button:hover {
+  background-color: #116f15;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

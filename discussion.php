@@ -12,6 +12,44 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 
   <title>FLIXPICK</title>
+
+  <style>
+    .discuss-card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 50%;
+      /* Set a fixed width for the cards */
+      padding: 20px;
+      box-sizing: border-box;
+      align-items: center;
+      margin: auto;
+    }
+
+    .discuss-body {
+      text-align: center;
+      align-items: center;
+      margin: auto;
+      padding: 10px;
+    }
+
+    .discuss-title{
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    .time-text {
+      text-align: right;
+      padding-top: 15px;
+    }
+
+    .col-md-6{
+      padding-top: 25px;
+    }
+
+  
+  </style>
 </head>
 
 <body>
@@ -34,21 +72,38 @@
         <a class="nav-link" href="discussion.php" style="color: white;">DISCUSSION</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="#rating" style="color: white;">WATCHLIST</a>
-        </li>
+        <a class="nav-link" href="#rating" style="color: white;">WATCHLIST</a>
+      </li>
     </ul>
   </nav>
-  
+
   <div class="card-container">
 
-  <div class="card">
-    <div class="card-body">
-      <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Create Discussion</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <div class="card">
+      <div class="card-body">
+      <h5 class="discuss-title">Create Discussion</h5>
+
+        <div class="mb-3">
+          <div class="col-md-6">
+            <label for="discussTitle" class="form-label">Discussion Title*</label>
+            <input type="text" class="form-control" id="discussTitle">
+        </div>
+        <textarea class="form-control" id="discussTextArea"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary">Start Discussion</button>
+      </div>
+
+      <div class="discuss-card">
+        <div class="discuss-body">
+          <h5 class="discuss-title">Card title</h5>
+          <p class="discuss-text">This is a wider card with supporting text below as a natural lead-in to additional
+            content. This content is a little bit longer.</p>
+          <p class="time-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        </div>
       </div>
     </div>
-  </div>
+
+
 
   </div>
 
