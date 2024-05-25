@@ -54,7 +54,8 @@ include 'db_connection.php';
         /* Full width */
         width: 100%;
         /* Semi-transparent background */
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: #458447;
+        border: 1px solid #ddd;
         /* Text color */
         color: white;
         /* Remove margin and add padding */
@@ -104,6 +105,7 @@ include 'db_connection.php';
 </head>
 
 <body>
+    <div id="overlay"></div>
     <header style="display: inline-flex">
         <img src="icon_movies.png" alt="Logo Icon" class="logo-icon" />
         <h1 class="title">FLIXPICK</h1>

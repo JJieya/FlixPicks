@@ -77,15 +77,10 @@ $conn->close();
         .nav-item.right {
             margin-left: auto;
         }
-
-
+ 
         a {
             text-decoration: none !important;
             color: inherit;
-        }
-
-        a:hover {
-            color: #455A64;
         }
 
         .card {
