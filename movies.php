@@ -120,7 +120,7 @@ include 'db_connection.php';
             <a class="nav-link active" href="movies.php">MOVIES</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#discussion">DISCUSSION</a>
+            <a class="nav-link active" href="discussion.php">DISCUSSION</a>
             </li>
         </ul>
     </nav>
