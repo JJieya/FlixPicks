@@ -218,15 +218,18 @@ $conn->close();
 
     <nav>
         <ul class="nav" style="width: 100%;">
-            <li class="nav-item">
-                <a class="nav-link active" href="homepage.html">HOME</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="movies.php">MOVIES</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">DISSCUSSION</a>
-            </li>
+        <li class="nav-item">
+        <a class="nav-link active" href="homepage.html" style="color: white;">HOME</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="movies.php" style="color: white;">MOVIES</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="discussion.php" style="color: white;">DISCUSSION</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#rating" style="color: white;">WATCHLIST</a>
+        </li>
             <li class="nav-item right">
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <a class="nav-link" href="logout.php">LOGOUT (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a>

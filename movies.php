@@ -110,17 +110,20 @@ include 'db_connection.php';
     </header>
   
     <nav>
-        <ul class="nav">
-            <li class="nav-item">
-            <a class="nav-link active" href="homepage.html">HOME</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link active" href="movies.php">MOVIES</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#discussion">DISCUSSION</a>
-            </li>
-        </ul>
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="homepage.html" style="color: white;">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="movies.php" style="color: white;">MOVIES</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="discussion.php" style="color: white;">DISCUSSION</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#rating" style="color: white;">WATCHLIST</a>
+        </li>
+      </ul>
     </nav>
         
     <div class="container mt-5">

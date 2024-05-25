@@ -31,11 +31,11 @@
         <a class="nav-link active" href="movies.php" style="color: white;">MOVIES</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#rating" style="color: white;">RATING</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="discussion.php" style="color: white;">DISCUSSION</a>
       </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#rating" style="color: white;">WATCHLIST</a>
+        </li>
     </ul>
   </nav>
   

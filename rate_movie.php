@@ -53,6 +53,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,19 +65,22 @@ $conn->close();
             margin-top: 50px;
             max-width: 600px;
             margin-bottom: 50px;
-            min-height: 800px; 
+            min-height: 800px;
         }
+
         .movie-title {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .movie-title h1 {
-            text-transform: uppercase; 
+            text-transform: uppercase;
             font-weight: bold;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); 
-            letter-spacing: 2px; 
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
             color: green;
         }
+
         .rate-form {
             background-color: rgba(0, 0, 0, 0.2);
             color: white;
@@ -84,9 +88,11 @@ $conn->close();
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .rate-form label {
             font-size: 18px;
         }
+
         .rate-form input[type="number"],
         .rate-form textarea {
             width: 100%;
@@ -96,6 +102,7 @@ $conn->close();
             border-radius: 5px;
             border: none;
         }
+
         .rate-form button {
             padding: 10px 20px;
             font-size: 16px;
@@ -104,14 +111,16 @@ $conn->close();
             background-color: green;
             color: white;
         }
+
         .nav-item.right {
             margin-left: auto;
         }
     </style>
 </head>
+
 <body>
     <div id="overlay"></div>
-    <header style ="display: inline-flex">
+    <header style="display: inline-flex">
         <img src="icon_movies.png" alt="Logo Icon" class="logo-icon" />
         <h1 class="title">FLIXPICK</h1>
     </header>
@@ -119,17 +128,21 @@ $conn->close();
     <nav>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" href="homepage.html">HOME</a>
+                <a class="nav-link active" href="homepage.html" style="color: white;">HOME</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="movies.php">MOVIES</a>
+                <a class="nav-link active" href="movies.php" style="color: white;">MOVIES</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">DISCUSSION</a>
+                <a class="nav-link" href="discussion.php" style="color: white;">DISCUSSION</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#rating" style="color: white;">WATCHLIST</a>
             </li>
             <li class="nav-item right">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a class="nav-link" href="logout.php">LOGOUT (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a>
+                    <a class="nav-link" href="logout.php">LOGOUT
+                        (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a>
                 <?php else: ?>
                     <a class="nav-link" href="login.php">LOGIN</a>
                 <?php endif; ?>
@@ -160,4 +173,5 @@ $conn->close();
         </div>
     </footer>
 </body>
+
 </html>
