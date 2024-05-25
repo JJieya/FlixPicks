@@ -69,10 +69,10 @@
         <a class="nav-link active" href="movies.php" style="color: white;">MOVIES</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="discussion.php" style="color: white;">DISCUSSION</a>
-      </li>
+          <a class="nav-link" href="watchlist.php" style="color: white;">WATCHLIST</a>
+        </li>
       <li class="nav-item">
-        <a class="nav-link" href="#rating" style="color: white;">WATCHLIST</a>
+        <a class="nav-link" href="discussion.php" style="color: white;">DISCUSSION</a>
       </li>
     </ul>
   </nav>
