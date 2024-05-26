@@ -125,7 +125,7 @@ $conn->close();
                 <a class="nav-link active" href="movies.php">MOVIES</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">DISCUSSION</a>
+                <a class="nav-link active" href="discussion.php">DISCUSSION</a>
             </li>
             <li class="nav-item right">
                 <?php if (isset($_SESSION['user_id'])): ?>
