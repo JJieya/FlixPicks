@@ -214,7 +214,7 @@ $conn->close();
     <nav>
         <ul class="nav" style="width: 100%;">
             <li class="nav-item">
-                <a class="nav-link active" href="homepage.html">HOME</a>
+                <a class="nav-link active" href="homepage.php">HOME</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="movies.php">MOVIES</a>
@@ -257,48 +257,31 @@ $conn->close();
                 <h2>Ratings and Reviews</h2>
             </div>
             <div class="ratings">
-                    <?php foreach ($ratings as $rating) : ?>		
-                        <div class="card">
-                            <div class="row d-flex">
-                                <div>
-                                    <img class="profile-pic" src="person-circle.svg">
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <h3 class="mt-2 mb-0"><?php echo htmlspecialchars($rating['user_name']); ?></h3>
-                                    <div>
-                                        <p class="text-left"><span class="text-mutedpt"><?php echo htmlspecialchars($rating['star_rating']); ?> Stars</span>
-                                        <span class="fa fa-star star-active ml-3"></span>
-                                        <span class="fa fa-star star-active"></span>
-                                        <span class="fa fa-star star-active"></span>
-                                        <span class="fa fa-star star-active"></span>
-                                        <span class="fa fa-star star-inactive"></span></p>
-                                    </div>
-                                </div>
+                <?php foreach ($ratings as $rating) : ?>		
+                    <div class="card">
+                        <div class="row d-flex">
+                            <div>
+                                <img class="profile-pic" src="person-circle.svg">
                             </div>
-                            <div class="row text-left">
-                                <p class="content"><?php echo htmlspecialchars($rating['review_comment']); ?> </p>
+                            <div class="d-flex flex-column">
+                                <h3 class="mt-2 mb-0"><?php echo htmlspecialchars($rating['user_name']); ?></h3>
+                                <div>
+                                    <p class="text-left"><span class="text-mutedpt"><?php echo htmlspecialchars($rating['star_rating']); ?> Stars</span>
+                                    <span class="fa fa-star star-active ml-3"></span>
+                                    <span class="fa fa-star star-active"></span>
+                                    <span class="fa fa-star star-active"></span>
+                                    <span class="fa fa-star star-active"></span>
+                                    <span class="fa fa-star star-inactive"></span></p>
+                                </div>
                             </div>
                         </div>
-                    <?php endforeach; ?>    
+                        <div class="row text-left">
+                            <p class="content"><?php echo htmlspecialchars($rating['review_comment']); ?> </p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>    
             </div>
     </section>
-
-   <!-- <div class="container">
-        <div class="movie-title">
-            <h1><?php echo htmlspecialchars($movie['name']); ?></h1>
-        </div>
-        <div class="movie-details row">
-            <div class="col-md-4">
-                <img src="<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="<?php echo htmlspecialchars($movie['name']); ?>">
-            </div>
-            <div class="col-md-8 details">
-                <h3>Directed by: <?php echo htmlspecialchars($movie['director']); ?></h3>
-                <h4>Released in: <?php echo htmlspecialchars($movie['release_year']); ?></h4>
-                <p><?php echo htmlspecialchars($movie['synopsis']); ?></p>
-            </div>
-        </div>
-    -->
-
 
     <footer class="footer">
         <div>
