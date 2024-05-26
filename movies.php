@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include 'db_connection.php'; 
+session_start();
 ?>
 
 
@@ -100,6 +101,9 @@ include 'db_connection.php';
     .last-row {
         margin-bottom: 0;
     }
+    .nav-item.right {
+            margin-left: auto;
+    }
     </style>
 
 </head>
@@ -114,13 +118,20 @@ include 'db_connection.php';
     <nav>
         <ul class="nav">
             <li class="nav-item">
-            <a class="nav-link active" href="homepage.html">HOME</a>
+            <a class="nav-link active" href="homepage.php">HOME</a>
             </li>
             <li class="nav-item">
             <a class="nav-link active" href="movies.php">MOVIES</a>
             </li>
             <li class="nav-item">
             <a class="nav-link active" href="discussion.php">DISCUSSION</a>
+            </li>
+            <li class="nav-item right">
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <a class="nav-link" href="logout.php">LOGOUT (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a>
+                <?php else: ?>
+                    <a class="nav-link" href="login.php">LOGIN</a>
+                <?php endif; ?>
             </li>
         </ul>
     </nav>
@@ -139,7 +150,7 @@ include 'db_connection.php';
                     $count++;
                     echo '<div class="col-md-4 mb-4';
                     if ($count == $result->num_rows) {
-                        echo ' last-row'; // 最后一行电影卡片的样式
+                        echo ' last-row'; // 
                     }
                     echo '">';
                     echo '<div class="movie">';
