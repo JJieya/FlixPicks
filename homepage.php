@@ -1,6 +1,22 @@
 <?php
 include 'db_connection.php';
 session_start();
+
+// Query to get movie data
+$sql = "SELECT id, name, synopsis, poster_url FROM movie";
+$result = $conn->query($sql);
+
+$movies = [];
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $movies[] = $row;
+    }
+} else {
+    echo "0 results";
+}
+$conn->close();
+
 ?>
 
 
@@ -38,6 +54,28 @@ session_start();
         .nav-link {
           color: white;
         }
+
+        .card-container {
+            margin-top:50px;
+            width: 70%;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 20px 0;
+        }
+
+        .card-container .card {
+            display: inline-block;
+            width: 250px;
+            margin-right: 10px;
+            vertical-align: top;
+        }
+
+        .card-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
     </style>
   </head>
   <body>
@@ -84,31 +122,39 @@ session_start();
     </div>
 
     <div class="card-container">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap" />
-        <h2>Card 1</h2>
-        <p>This is the first card.</p>
-        <div class="movie-details">
-          <button>View Details</button>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap" />
-        <h2>Card 2</h2>
-        <p>This is the second card.</p>
-        <div class="movie-details">
-          <button>View Details</button>
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap" />
-        <h2>Card 3</h2>
-        <p>This is the third card.</p>
-        <div class="movie-details">
-          <button>View Details</button>
-        </div>
-      </div>
+        <?php foreach ($movies as $movie) : ?>
+            <div class="card">
+                <img src="<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="<?php echo htmlspecialchars($movie['name']); ?>">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="movie_detail.php?id=<?php echo $movie['id']; ?>" class="btn btn-sm btn-outline-secondary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
+
+   <!--  <div class="card-container">
+          <div class="row">
+              <?php foreach ($movies as $movie) : ?>
+                  <div class="col-md-4 col-sm-6 mb-4">
+                      <div class="card h-100">
+                          <img class="card-img-top" src="<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="<?php echo htmlspecialchars($movie['name']); ?>">
+                          <div class="card-body">
+                              <div class="d-flex justify-content-between align-items-center">
+                                  <div class="btn-group">
+                                      <a href="movie_detail.php?id=<?php echo $movie['id']; ?>" class="btn btn-sm btn-outline-secondary">View Details</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              <?php endforeach; ?>
+           </div>
+    </div>  -->
+
 
     <footer>&copy; 2024 FLIXPICK. All Rights Reserved.</footer>
 
