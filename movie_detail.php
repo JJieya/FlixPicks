@@ -2,6 +2,8 @@
 include 'db_connection.php';
 session_start();
 
+//for movie rating:
+
 if (isset($_GET['id'])) {
     $movie_id = $_GET['id'];
 
@@ -36,8 +38,37 @@ if (isset($_GET['id'])) {
             $ratings[] = $row;
         }
     }
+
 } else {
     echo "No movie ID provided.";
+    exit;
+}
+
+//for watchlist:
+
+if (isset($_GET['id'])) {
+    $movie_id = $_GET['id'];
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $watchlist = $_POST['watchlist'];
+        $user_id = $_SESSION['user_id'];
+
+        $sql = "INSERT INTO watchlist (user_id, movie_id) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ii', $user_id, $movie_id);
+
+        if ($stmt->execute()) {
+            $_SESSION['message'] = "movie saved to watchlist successfully.";
+        } else {
+            $_SESSION['message'] = "Error submitting watchlist.";
+        }
+
+        header("Location: movie_detail.php?id=$movie_id");
+        exit;
+    }
+
+} else {
+    echo "watchlist is not created.";
     exit;
 }
 $conn->close();
@@ -267,11 +298,11 @@ $conn->close();
                 <p class="lead"><?php echo htmlspecialchars($movie['synopsis']); ?></p>
                 <div class="d-flex">
                     <button class="btn btn-outline-dark flex-shrink-0" type="button"
-                        onclick="checkLogin(<?php echo $movie_id; ?>)">Rate This Movie
+                        onclick="checkLoginRating(<?php echo $movie_id; ?>)">Rate This Movie
                     </button>
                     <div style="padding-left: 30px">
                         <button class="btn btn-outline-success" type="button"
-                            onclick="checkLogin(<?php echo $movie_id; ?>)">Save to Watchlist
+                            onclick="checkLoginWatchlist(<?php echo $movie_id; ?>)">Save to Watchlist
                         </button>
                     </div>
 
@@ -311,22 +342,6 @@ $conn->close();
         </div>
     </section>
 
-    <!-- <div class="container">
-        <div class="movie-title">
-            <h1><?php echo htmlspecialchars($movie['name']); ?></h1>
-        </div>
-        <div class="movie-details row">
-            <div class="col-md-4">
-                <img src="<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="<?php echo htmlspecialchars($movie['name']); ?>">
-            </div>
-            <div class="col-md-8 details">
-                <h3>Directed by: <?php echo htmlspecialchars($movie['director']); ?></h3>
-                <h4>Released in: <?php echo htmlspecialchars($movie['release_year']); ?></h4>
-                <p><?php echo htmlspecialchars($movie['synopsis']); ?></p>
-            </div>
-        </div>
-    -->
-
 
     <footer class="footer">
         <div>
@@ -335,7 +350,7 @@ $conn->close();
     </footer>
 
     <script>
-        function checkLogin(movie_id) {
+        function checkLoginRating(movie_id) {
             <?php if (!isset($_SESSION['user_id'])): ?>
                 alert("Please log in to rate this movie.");
                 window.location.href = 'login.php';
@@ -343,6 +358,18 @@ $conn->close();
             <?php else: ?>
                 window.location.href = 'rate_movie.php?id=' + movie_id;
                 return true;
+            <?php endif; ?>
+        }
+
+        function checkLoginWatchlist(movie_id) {
+            <?php if (!isset($_SESSION['user_id'])): ?>
+                alert("Please log in to rate this movie.");
+                window.location.href = 'login.php';
+                return false;
+            <?php else: ?>
+                // window.location.href = 'watchlist.php';
+                return true;
+
             <?php endif; ?>
         }
     </script>
