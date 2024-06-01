@@ -7,10 +7,14 @@
 
   <!-- Bootstrap CSS -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script> -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <title>FLIXPICK</title>
 
   <style>
@@ -34,7 +38,7 @@
       padding: 10px;
     }
 
-    .discuss-title{
+    .discuss-title {
       text-align: center;
       padding-bottom: 10px;
     }
@@ -44,16 +48,33 @@
       padding-top: 15px;
     }
 
-    .col-md-6{
+    .col-md-6 {
       padding-top: 25px;
     }
 
-    .form-control{
+    .form-control {
       margin: 10px;
     }
-
-  
   </style>
+
+  <script>
+    function handleSubmit(title, comment) {
+
+      console.log('title', title);
+      console.log('comment', comment);
+
+      $.post("discussDataSend.php",
+        {
+          title: title,
+          comment: comment,
+   
+        },
+        function (data, status) {
+          alert("Discussion posted successfully");
+        });
+    }
+
+  </script>
 </head>
 
 <body>
@@ -73,8 +94,8 @@
         <a class="nav-link active" href="movies.php" style="color: white;">MOVIES</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="watchlist.php" style="color: white;">WATCHLIST</a>
-        </li>
+        <a class="nav-link" href="watchlist.php" style="color: white;">WATCHLIST</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="discussion.php" style="color: white;">DISCUSSION</a>
       </li>
@@ -85,17 +106,20 @@
 
     <div class="card">
       <div class="card-body">
-      <h5 class="discuss-title">Create Discussion</h5>
+        <h5 class="discuss-title">Create Discussion</h5>
 
         <div class="mb-3">
           <div class="col-md-6">
-            <label for="discussTitle" class="form-label">Discussion Title*</label>
-            <input type="text" class="form-control" id="discussTitle">
+            <label for="title" class="form-label">Discussion Title*</label>
+            <input type="text" class="form-control" id="title">
+          </div>
+          <textarea class="form-control" id="comment"></textarea>
         </div>
-        <textarea class="form-control" id="discussTextArea"></textarea>
-        </div>
-        <button type="button" class="btn btn-primary">Start Discussion</button>
+        <button type="button" class="btn btn-primary"
+          onclick="handleSubmit(document.getElementById('title').value, document.getElementById('comment').value)">Start
+          Discussion</button>
       </div>
+
 
       <div class="discuss-card">
         <div class="discuss-body">
@@ -116,17 +140,7 @@
   <!-- Optional JavaScript -->
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-    crossorigin="anonymous"></script>
 </body>
 
 </html>
