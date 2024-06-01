@@ -1,10 +1,12 @@
 <?php
+// error display setting
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include 'db_connection.php'; 
+include 'db_connection.php';
 session_start();
+
 ?>
 
 
@@ -36,7 +38,7 @@ session_start();
         align-items: center;
         /* Ensure container height adjusts based on content */
         height: auto;
-        margin-bottom: 20px;
+        margin: 20px;
     }
 
     /* Styling for movie poster image */
@@ -54,12 +56,9 @@ session_start();
     .movie-title {
         /* Full width */
         width: 100%;
-        /* Semi-transparent background */
         background-color: #458447;
         border: 1px solid #ddd;
-        /* Text color */
         color: white;
-        /* Remove margin and add padding */
         margin: 0;
         padding: 10px;
         text-align: center;
@@ -81,26 +80,11 @@ session_start();
         overflow-y: auto;
     }
 
-    /* Adjust row margins */
-    .row {
-        margin-left: -15px;
-        margin-right: -15px;
-        margin-bottom: 20px;
-        padding: 10px;
-    }
-
-    /* Adjust column padding */
-    .col-md-4 {
-        padding-left: 15px;
-        padding-right: 15px;
-        /* Ensure consistent height for movie containers */
-        height: auto;
-    }
-
     /* Remove margin for last row */
     .last-row {
         margin-bottom: 0;
     }
+    
     .nav-item.right {
             margin-left: auto;
     }
@@ -128,7 +112,7 @@ session_start();
             </li>
             <li class="nav-item right">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a class="nav-link" href="logout.php">LOGOUT (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a>
+                    <a class="nav-link" href="logout.php">LOGOUT (<?php echo $_SESSION['username']; ?>)</a>  //
                 <?php else: ?>
                     <a class="nav-link" href="login.php">LOGIN</a>
                 <?php endif; ?>
@@ -140,11 +124,11 @@ session_start();
         <div class="row">
             <?php
             include 'db_connection.php';
-
+            // Define the SQL query to select id, name, and poster_url from the movie table //
             $sql = "SELECT id, name, poster_url FROM movie";
-            $result = $conn->query($sql);
+            $result = $conn->query($sql); //Execute the query and store the result in the $result variable //
 
-            if ($result->num_rows > 0) {
+            if ($result->num_rows > 0) {      
                 $count = 0;
                 while($row = $result->fetch_assoc()) {
                     $count++;
