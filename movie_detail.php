@@ -216,6 +216,10 @@ $conn->close();
         .vote {
             cursor: pointer;
         }
+
+        #watchStat[disabled] {
+            display: none;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -232,7 +236,12 @@ $conn->close();
                     userID: user_id
                 },
                 function (data, status) {
-                    alert("Data: " + data + "\nStatus: " + status);
+                    if (status) {
+                        alert("Movie saved to the watchlist!");
+
+                        document.getElementById("watchStat").disabled = status;
+
+                    }
                 });
         }
 
@@ -296,7 +305,7 @@ $conn->close();
 
 
                     <div style="padding-left: 30px">
-                        <button class="btn btn-outline-success" type="hidden"
+                        <button class="btn btn-outline-success" id="watchStat" type="hidden"
                             onclick="checkLoginWatchlist(<?php echo $movie_id; ?>)">Save to Watchlist
                         </button>
                     </div>
@@ -358,20 +367,15 @@ $conn->close();
 
 
         function checkLoginWatchlist(movie_id) {
-            // var userId = $_SESSION['user_id']
-            // console.log('userId',user_id);
             <?php if (!isset($_SESSION['user_id'])): ?>
-                    alert("Please log in to rate this movie.");
-                    window.location.href = 'login.php';
-                    return false;
-                <?php else: ?>
-                //     var userId = $_SESSION['user_id']
-                // console.log('userId',userId);
-                    // window.location.href = 'watchlist.php';
-                    addToWatchlist(movie_id);
-                    return true;
+                alert("Please log in to rate this movie.");
+                window.location.href = 'login.php';
+                return false;
+            <?php else: ?>
+                addToWatchlist(movie_id);
+                return true;
 
-                <?php endif; ?>
+            <?php endif; ?>
         }
     </script>
 </body>
