@@ -48,6 +48,10 @@
       padding-top: 25px;
     }
 
+    .form-control{
+      margin: 10px;
+    }
+
   
   </style>
 </head>
