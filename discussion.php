@@ -23,23 +23,24 @@
       border: 1px solid #ddd;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      width: 50%;
+      width: 70%;
       /* Set a fixed width for the cards */
       padding: 20px;
       box-sizing: border-box;
       align-items: center;
       margin: auto;
+      margin-top: 10px;
     }
 
     .discuss-body {
-      text-align: center;
+      text-align: left;
       align-items: center;
       margin: auto;
       padding: 10px;
     }
 
     .discuss-title {
-      text-align: center;
+      text-align: left;
       padding-bottom: 10px;
     }
 
@@ -55,6 +56,10 @@
     .form-control {
       margin: 10px;
     }
+    
+    .divider{
+      border: 2px;
+    }
   </style>
 
   <script>
@@ -67,7 +72,7 @@
         {
           title: title,
           comment: comment,
-   
+
         },
         function (data, status) {
           alert("Discussion posted successfully");
@@ -111,35 +116,60 @@
         <div class="mb-3">
           <div class="col-md-6">
             <label for="title" class="form-label">Discussion Title*</label>
-            <input type="text" class="form-control" id="title">
+            <input type="text" class="form-control" id="title" placeholder="Give a Title">
           </div>
-          <textarea class="form-control" id="comment"></textarea>
+          <textarea class="form-control" id="comment" placeholder="What do you think about your interested movie?"></textarea>
         </div>
         <button type="button" class="btn btn-primary"
           onclick="handleSubmit(document.getElementById('title').value, document.getElementById('comment').value)">Start
           Discussion</button>
       </div>
 
+ <!-- discuss feed starts from here: -->
+      <?php
+      include 'db_connection.php';
+      session_start();
 
-      <div class="discuss-card">
-        <div class="discuss-body">
-          <h5 class="discuss-title">Card title</h5>
-          <p class="discuss-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.</p>
-          <p class="time-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
+      //checking if the user logged in or not:
+      if (!isset($_SESSION['user_id'])) {
+        echo "Please login to start discussion.";
+        exit;
+      }
+      $sql = "SELECT * FROM `forum`;";
+
+      $result = $conn->query($sql);
+
+
+      if ($result) {
+        if ($result->num_rows > 0) {
+          $count = 0;
+          while ($row = $result->fetch_assoc()) {
+
+            $count++;
+
+            echo '<div class="discuss-card">';
+            echo '<h5 class="card-header">Featured</h5>';
+            echo '<div class="discuss-body">';
+            echo ' <h5 class="discuss-title">' . $row['title'] . '</h5>';
+            echo ' <p class="discuss-text">' . $row['comment'] . '</p>';
+            echo '<div class="movie-title">' . $row["name"] . '</div>';
+            echo '<p class="time-text"><small class="text-body-secondary">' . $row['created_at'] . '</small></p>';
+            echo '</div>';
+            echo '</div>';
+
+            echo '<div class="divider">';
+            echo '</div>';
+          }
+        } else {
+          echo "0 results";
+        }
+      }
+      ?>
+
     </div>
-
-
-
   </div>
 
   <footer>&copy; 2024 FLIXPICK. All Rights Reserved.</footer>
-
-  <!-- Optional JavaScript -->
-
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
 </body>
 
