@@ -2,19 +2,28 @@
 include 'db_connection.php';
 session_start();
 
-// Query to get movie data
+// SQL query to select the id, name, synopsis, and poster_url columns from the movie table
 $sql = "SELECT id, name, synopsis, poster_url FROM movie";
+
+// Execute the query and store the result in the $result variable
 $result = $conn->query($sql);
 
+// Initialize an empty array to store the movies data
 $movies = [];
 
+// Check if there are any rows returned by the query
 if ($result->num_rows > 0) {
+    // Loop through each row in the result set
     while($row = $result->fetch_assoc()) {
+        // Add the current row's data to the $movies array
         $movies[] = $row;
     }
 } else {
+    // If no rows are returned, print "0 results"
     echo "0 results";
 }
+
+// Close the database connection
 $conn->close();
 
 ?>
@@ -75,7 +84,6 @@ $conn->close();
             height: auto;
             border-radius: 10px;
         }
-
     </style>
   </head>
   <body>
@@ -99,7 +107,7 @@ $conn->close();
         </li>
         <li class="nav-item right">
           <?php if (isset($_SESSION['user_id'])): ?>
-              <a class="nav-link" href="logout.php">LOGOUT (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a>
+              <a class="nav-link" href="logout.php">LOGOUT (<?php echo $_SESSION['username']; ?>)</a>
           <?php else: ?>
               <a class="nav-link" href="login.php">LOGIN</a>
           <?php endif; ?>
@@ -108,6 +116,7 @@ $conn->close();
     </nav>
 
     <div class="searchbar">
+      <!-- Input field for searching movies -->
       <input 
          type="search" 
          id="search-input" 
@@ -117,14 +126,18 @@ $conn->close();
          aria-describedby="search-addon" 
          list="movie-list"
       />
+      <!-- Datalist for auto-suggestions in the search input -->
       <datalist id="movie-list"></datalist>
+
+      <!-- Button to trigger the search action -->
       <button type="button" class="btn btn-primary" id="search-btn">Search</button>
     </div>
 
+    
     <div class="card-container">
         <?php foreach ($movies as $movie) : ?>
             <div class="card">
-                <img src="<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="<?php echo htmlspecialchars($movie['name']); ?>">
+                <img src="<?php echo $movie['poster_url']; ?>" alt="<?php echo $movie['name']; ?>">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
@@ -135,25 +148,6 @@ $conn->close();
             </div>
         <?php endforeach; ?>
     </div>
-
-   <!--  <div class="card-container">
-          <div class="row">
-              <?php foreach ($movies as $movie) : ?>
-                  <div class="col-md-4 col-sm-6 mb-4">
-                      <div class="card h-100">
-                          <img class="card-img-top" src="<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="<?php echo htmlspecialchars($movie['name']); ?>">
-                          <div class="card-body">
-                              <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                      <a href="movie_detail.php?id=<?php echo $movie['id']; ?>" class="btn btn-sm btn-outline-secondary">View Details</a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              <?php endforeach; ?>
-           </div>
-    </div>  -->
 
 
     <footer>&copy; 2024 FLIXPICK. All Rights Reserved.</footer>
