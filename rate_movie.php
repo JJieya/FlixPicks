@@ -3,7 +3,7 @@ include 'db_connection.php';
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    echo "You need to log in to rate this movie.";
+    echo "You need to log in or register to rate this movie.";
     exit;
 }
 
@@ -73,8 +73,8 @@ $conn->close();
         .movie-title h1 {
             text-transform: uppercase; 
             font-weight: bold;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); 
-            letter-spacing: 2px; 
+            text-shadow: 2px 2px 2px rgba(255, 255, 255, 1); 
+            letter-spacing: 2px;
             color: green;
         }
         .rate-form {
@@ -82,7 +82,7 @@ $conn->close();
             color: white;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
         }
         .rate-form label {
             font-size: 18px;
