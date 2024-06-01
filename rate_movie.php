@@ -119,7 +119,7 @@ $conn->close();
     <nav>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" href="homepage.html">HOME</a>
+                <a class="nav-link active" href="homepage.php">HOME</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="movies.php">MOVIES</a>
