@@ -84,7 +84,7 @@ session_start();
     .last-row {
         margin-bottom: 0;
     }
-    
+
     .nav-item.right {
             margin-left: auto;
     }
@@ -127,7 +127,7 @@ session_start();
             // Define the SQL query to select id, name, and poster_url from the movie table //
             $sql = "SELECT id, name, poster_url FROM movie";
             $result = $conn->query($sql); //Execute the query and store the result in the $result variable //
-
+            
             if ($result->num_rows > 0) {      
                 $count = 0;
                 while($row = $result->fetch_assoc()) {
