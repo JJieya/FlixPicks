@@ -1,3 +1,12 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include 'db_connection.php'; 
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,41 +23,77 @@
   <title>FLIXPICK</title>
 
   <style>
-    .discuss-card {
-      background-color: white;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      width: 50%;
-      /* Set a fixed width for the cards */
-      padding: 20px;
-      box-sizing: border-box;
-      align-items: center;
-      margin: auto;
+    .movie {
+        /* Positioning and alignment */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Ensure container height adjusts based on content */
+        height: auto;
+        margin-bottom: 20px;
     }
 
-    .discuss-body {
-      text-align: center;
-      align-items: center;
-      margin: auto;
-      padding: 10px;
+    /* Styling for movie poster image */
+    .movie img {
+        /* Make the image fill the container */
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        /* Remove default border and ensure block display */
+        border: 1px solid #ddd;
+        display: block;
     }
 
-    .discuss-title{
-      text-align: center;
-      padding-bottom: 10px;
+    /* Styling for movie title */
+    .movie-title {
+        /* Full width */
+        width: 100%;
+        /* Semi-transparent background */
+        background-color: rgba(0, 0, 0, 0.7);
+        /* Text color */
+        color: white;
+        /* Remove margin and add padding */
+        margin: 0;
+        padding: 10px;
+        text-align: center;
+        /* Font size */
+        font-size: 1.3rem;
+         /* Text shadow for effect */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        /* Additional font style */
+        font-weight: bold;
     }
 
-    .time-text {
-      text-align: right;
-      padding-top: 15px;
+    /* Styling for main container */
+    .container {
+        /* Add padding to top and bottom */
+        padding-top: 20px;
+        padding-bottom: 50px;
+        /* Set maximum height and enable vertical scrollbar */
+        max-height: 600px;
+        overflow-y: auto;
     }
 
-    .col-md-6{
-      padding-top: 25px;
+    /* Adjust row margins */
+    .row {
+        margin-left: -15px;
+        margin-right: -15px;
+        margin-bottom: 20px;
+        padding: 10px;
     }
 
-  
+    /* Adjust column padding */
+    .col-md-4 {
+        padding-left: 15px;
+        padding-right: 15px;
+        /* Ensure consistent height for movie containers */
+        height: auto;
+    }
+
+    /* Remove margin for last row */
+    .last-row {
+        margin-bottom: 0;
+    }
   </style>
 </head>
 
@@ -69,17 +114,66 @@
         <a class="nav-link active" href="movies.php" style="color: white;">MOVIES</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="watchlist.php" style="color: white;">WATCHLIST</a>
-        </li>
+        <a class="nav-link" href="watchlist.php" style="color: white;">WATCHLIST</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="discussion.php" style="color: white;">DISCUSSION</a>
       </li>
     </ul>
   </nav>
 
-  <div class="card-container">
+  <div class="container mt-5">
+    <div class="row">
+    <?php
+    include 'db_connection.php';
+    session_start();
+
+    if (!isset($_SESSION['user_id'])) {
+      echo 'Login please!';
+
+      return false;
+    } else {
+
+      $user_id = $_SESSION['user_id'];
 
 
+      $sql = "select m.id, name, poster_url 
+      from watchlist w JOIN movie m 
+      ON w.movie_id = m.id 
+      WHERE w.user_id = '$user_id'";
+      
+      $result = $conn->query($sql);
+
+      
+      if ($result) {
+        if ($result->num_rows > 0) {
+          $count = 0;
+          while ($row = $result->fetch_assoc()) {
+            
+            $count++;
+           
+            echo '<div class="col-6 col-md-3';
+            if ($count == $result->num_rows) {
+              echo ' last-row'; // 最后一行电影卡片的样式
+            }
+            echo '">';
+            echo '<div class="movie">';
+            echo '<a href="movie_detail.php?id=' . $row["id"] . '">';
+            echo '<img src="' . $row["poster_url"] . '" alt="' . $row["name"] . '">';
+            echo '</a>'; // Closing the anchor tag
+            echo '<div class="movie-title">' . $row["name"] . '</div>';
+            echo '</div>';
+            echo '</div>';
+          }
+        } else {
+          echo "0 results";
+        }
+      }
+    }
+    $conn->close();
+    ?>
+
+</div>
   </div>
 
   <footer>&copy; 2024 FLIXPICK. All Rights Reserved.</footer>
@@ -89,10 +183,6 @@
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
