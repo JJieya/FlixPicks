@@ -42,6 +42,7 @@
     .discuss-title {
       text-align: left;
       padding-bottom: 10px;
+      font-weight: bold;
     }
 
     .time-text {
@@ -53,12 +54,37 @@
       padding-top: 25px;
     }
 
-    .form-control {
+    /* .form-control {
+      margin: 10px;
+    } */
+
+    #title {
       margin: 10px;
     }
-    
-    .divider{
+
+    #comment {
+      margin-left: 25px;
+      width: 94%;
+    }
+
+    .divider {
       border: 2px;
+    }
+
+    .discussButton {
+      text-align: center;
+      align-items: center;
+      margin: auto;
+      padding: 10px;
+    }
+
+    .commentButton{
+      text-align: right;
+      align-items: center;
+      margin: auto;
+      /* padding: 5px; */
+      padding-top: 15px;
+      padding-right: 40px;
     }
   </style>
 
@@ -111,30 +137,34 @@
 
     <div class="card">
       <div class="card-body">
-        <h5 class="discuss-title">Create Discussion</h5>
+        <h5 class="discuss-title">Discussion Forum:</h5>
 
         <div class="mb-3">
           <div class="col-md-6">
-            <label for="title" class="form-label">Discussion Title*</label>
+            <!-- <label for="title" class="form-label">Discussion Title*</label> -->
             <input type="text" class="form-control" id="title" placeholder="Give a Title">
           </div>
-          <textarea class="form-control" id="comment" placeholder="What do you think about your interested movie?"></textarea>
+          <!-- <label for="title" class="form-label">Your Comment*</label> -->
+          <textarea class="form-control" id="comment"
+            placeholder="What do you think about your interested movie?"></textarea>
         </div>
-        <button type="button" class="btn btn-primary"
-          onclick="handleSubmit(document.getElementById('title').value, document.getElementById('comment').value)">Start
-          Discussion</button>
+        <div class="discussButton">
+          <button type="button" class="btn btn-outline-success"
+            onclick="handleSubmit(document.getElementById('title').value, document.getElementById('comment').value)">Create
+            Discussion</button>
+        </div>
       </div>
 
- <!-- discuss feed starts from here: -->
+      <!-- discuss feed starts from here: -->
       <?php
       include 'db_connection.php';
       session_start();
 
       //checking if the user logged in or not:
-      if (!isset($_SESSION['user_id'])) {
-        echo "Please login to start discussion.";
-        exit;
-      }
+      // if (!isset($_SESSION['user_id'])) {
+      //   echo "Please login to start discussion.";
+      //   exit;
+      // }
       $sql = "SELECT * FROM `forum`;";
 
       $result = $conn->query($sql);
@@ -148,14 +178,17 @@
             $count++;
 
             echo '<div class="discuss-card">';
-            echo '<h5 class="card-header">Featured</h5>';
+            echo '<h5 class="card-header">FEED:</h5>';
             echo '<div class="discuss-body">';
             echo ' <h5 class="discuss-title">' . $row['title'] . '</h5>';
             echo ' <p class="discuss-text">' . $row['comment'] . '</p>';
             echo '<div class="movie-title">' . $row["name"] . '</div>';
             echo '<p class="time-text"><small class="text-body-secondary">' . $row['created_at'] . '</small></p>';
+            echo '<div class="commentButton">
+            <button type="button" class="btn btn-success btn-sm" onclick="">Comment to this thread</button></div>';
             echo '</div>';
             echo '</div>';
+
 
             echo '<div class="divider">';
             echo '</div>';
