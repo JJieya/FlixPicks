@@ -44,33 +44,6 @@ if (isset($_GET['id'])) {
     exit;
 }
 
-//for watchlist:
-
-if (isset($_GET['id'])) {
-    $movie_id = $_GET['id'];
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $watchlist = $_POST['watchlist'];
-        $user_id = $_SESSION['user_id'];
-
-        $sql = "INSERT INTO watchlist (user_id, movie_id) VALUES (?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ii', $user_id, $movie_id);
-
-        if ($stmt->execute()) {
-            $_SESSION['message'] = "movie saved to watchlist successfully.";
-        } else {
-            $_SESSION['message'] = "Error submitting watchlist.";
-        }
-
-        header("Location: movie_detail.php?id=$movie_id");
-        exit;
-    }
-
-} else {
-    echo "watchlist is not created.";
-    exit;
-}
 $conn->close();
 ?>
 
@@ -244,6 +217,26 @@ $conn->close();
             cursor: pointer;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+    <script>
+        function addToWatchlist(movie_id) {
+            user_id = <?php echo $_SESSION['user_id']; ?>;
+            console.log('Movie: ', movie_id, ' User: ', user_id);
+
+            $.post("watchlistSendData.php",
+                {
+                    movieID: movie_id,
+                    userID: user_id
+                },
+                function (data, status) {
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+        }
+
+    </script>
 </head>
 
 <body>
@@ -300,9 +293,11 @@ $conn->close();
                     <button class="btn btn-outline-dark flex-shrink-0" type="button"
                         onclick="checkLoginRating(<?php echo $movie_id; ?>)">Rate This Movie
                     </button>
+
+
                     <div style="padding-left: 30px">
-                        <button class="btn btn-outline-success" type="button"
-                            onclick="checkLoginWatchlist(<?php echo $movie_id; ?>)">Save to Watchlist
+                        <button class="btn btn-outline-success" type="hidden"
+                            onclick="addToWatchlist(<?php echo $movie_id; ?>)">Save to Watchlist
                         </button>
                     </div>
 
@@ -361,17 +356,23 @@ $conn->close();
             <?php endif; ?>
         }
 
-        function checkLoginWatchlist(movie_id) {
-            <?php if (!isset($_SESSION['user_id'])): ?>
-                alert("Please log in to rate this movie.");
-                window.location.href = 'login.php';
-                return false;
-            <?php else: ?>
-                // window.location.href = 'watchlist.php';
-                return true;
 
-            <?php endif; ?>
-        }
+        // function checkLoginWatchlist(movie_id) {
+        //     // var userId = $_SESSION['user_id']
+        //     // console.log('userId',user_id);
+        //     <?php if (!isset($_SESSION['user_id'])): ?>
+            //         alert("Please log in to rate this movie.");
+            //         window.location.href = 'login.php';
+            //         return false;
+            //     <?php else: ?>
+            //     //     var userId = $_SESSION['user_id']
+            //     // console.log('userId',userId);
+            //         // window.location.href = 'watchlist.php';
+            //         addToWatchlist(movie_id);
+            //         return true;
+
+            //     <?php endif; ?>
+        // }
     </script>
 </body>
 
