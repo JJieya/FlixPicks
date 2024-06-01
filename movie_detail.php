@@ -297,7 +297,7 @@ $conn->close();
 
                     <div style="padding-left: 30px">
                         <button class="btn btn-outline-success" type="hidden"
-                            onclick="addToWatchlist(<?php echo $movie_id; ?>)">Save to Watchlist
+                            onclick="checkLoginWatchlist(<?php echo $movie_id; ?>)">Save to Watchlist
                         </button>
                     </div>
 
@@ -357,22 +357,22 @@ $conn->close();
         }
 
 
-        // function checkLoginWatchlist(movie_id) {
-        //     // var userId = $_SESSION['user_id']
-        //     // console.log('userId',user_id);
-        //     <?php if (!isset($_SESSION['user_id'])): ?>
-            //         alert("Please log in to rate this movie.");
-            //         window.location.href = 'login.php';
-            //         return false;
-            //     <?php else: ?>
-            //     //     var userId = $_SESSION['user_id']
-            //     // console.log('userId',userId);
-            //         // window.location.href = 'watchlist.php';
-            //         addToWatchlist(movie_id);
-            //         return true;
+        function checkLoginWatchlist(movie_id) {
+            // var userId = $_SESSION['user_id']
+            // console.log('userId',user_id);
+            <?php if (!isset($_SESSION['user_id'])): ?>
+                    alert("Please log in to rate this movie.");
+                    window.location.href = 'login.php';
+                    return false;
+                <?php else: ?>
+                //     var userId = $_SESSION['user_id']
+                // console.log('userId',userId);
+                    // window.location.href = 'watchlist.php';
+                    addToWatchlist(movie_id);
+                    return true;
 
-            //     <?php endif; ?>
-        // }
+                <?php endif; ?>
+        }
     </script>
 </body>
 
