@@ -20,20 +20,23 @@ if (isset($_GET['id'])) {
         exit;
     }
 
-    // Retrieve ratings for this movie
+    // SQL query to retrieve ratings for a specific movie along with user names
     $sql_ratings = "
-        SELECT r.*, u.name AS user_name
-        FROM rating r
-        JOIN users u ON r.user_id = u.id
-        WHERE r.movie_id = ?
+        SELECT rating.*, users.name AS user_name
+        FROM rating 
+        JOIN users ON rating.user_id = users.id
+        WHERE rating.movie_id = ?
     ";
+    // Prepare the SQL statement
     $stmt_ratings = $conn->prepare($sql_ratings);
+    // Bind the movie_id parameter to the SQL statement
     $stmt_ratings->bind_param("i", $movie_id);
     $stmt_ratings->execute();
     $result_ratings = $stmt_ratings->get_result();
-
+    // Initialize an empty array to store the ratings
     $ratings = [];
     if ($result_ratings->num_rows > 0) {
+        // Loop through each row in the result set
         while ($row = $result_ratings->fetch_assoc()) {
             $ratings[] = $row;
         }
@@ -44,17 +47,17 @@ if (isset($_GET['id'])) {
     where user_id = ? and movie_id = ?";
 
     $stmt_watchlist = $conn->prepare($watchlistEnable);
-    $stmt_watchlist->bind_param("ii",$userID, $movie_id);
+    $stmt_watchlist->bind_param("ii", $userID, $movie_id);
     $stmt_watchlist->execute();
 
     $watchlistData = $stmt_watchlist->get_result();
 
     $buttonDisable = false;
 
-    if($watchlistData->num_rows < 1) {
+    if ($watchlistData->num_rows < 1) {
         $buttonDisable = true;
     }
-    
+
 
 } else {
     echo "No movie ID provided.";
@@ -95,19 +98,13 @@ $conn->close();
             color: green;
         }
 
-
         .nav-item.right {
             margin-left: auto;
         }
 
-
         a {
             text-decoration: none !important;
             color: inherit;
-        }
-
-        a:hover {
-            color: #455A64;
         }
 
         .card {
@@ -118,99 +115,6 @@ $conn->close();
             margin-top: 30px;
             padding-top: 30px;
             padding-bottom: 30px;
-        }
-
-        .rating-box {
-            width: 130px;
-            height: 130px;
-            margin-right: auto;
-            margin-left: auto;
-            background-color: #FBC02D;
-            color: #fff;
-        }
-
-        .rating-label {
-            font-weight: bold;
-        }
-
-        /* Rating bar width */
-        .rating-bar {
-            width: 300px;
-            padding: 8px;
-            border-radius: 5px;
-        }
-
-        /* The bar container */
-        .bar-container {
-            width: 100%;
-            background-color: #f1f1f1;
-            text-align: center;
-            color: white;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-bottom: 5px;
-        }
-
-        /* Individual bars */
-        .bar-5 {
-            width: 70%;
-            height: 13px;
-            background-color: #FBC02D;
-            border-radius: 20px;
-
-        }
-
-        .bar-4 {
-            width: 30%;
-            height: 13px;
-            background-color: #FBC02D;
-            border-radius: 20px;
-
-        }
-
-        .bar-3 {
-            width: 20%;
-            height: 13px;
-            background-color: #FBC02D;
-            border-radius: 20px;
-
-        }
-
-        .bar-2 {
-            width: 10%;
-            height: 13px;
-            background-color: #FBC02D;
-            border-radius: 20px;
-
-        }
-
-        .bar-1 {
-            width: 0%;
-            height: 13px;
-            background-color: #FBC02D;
-            border-radius: 20px;
-
-        }
-
-        .star-active {
-            color: #FBC02D;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        .star-active:hover {
-            color: #F9A825;
-            cursor: pointer;
-        }
-
-        .star-inactive {
-            color: #CFD8DC;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        .blue-text {
-            color: #0091EA;
         }
 
         .content {
@@ -263,7 +167,7 @@ $conn->close();
         }
 
     </script>
-    
+
 
 
 
@@ -280,7 +184,7 @@ $conn->close();
     <nav>
         <ul class="nav" style="width: 100%;">
             <li class="nav-item">
-                <a class="nav-link active" href="homepage.html" style="color: white;">HOME</a>
+                <a class="nav-link active" href="homepage.php">HOME</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="movies.php" style="color: white;">MOVIES</a>
@@ -335,6 +239,7 @@ $conn->close();
                 </div>
             </div>
         </div>
+     
         <div class="ratings">
             <h2>Ratings and Reviews</h2>
         </div>
@@ -346,22 +251,15 @@ $conn->close();
                             <img class="profile-pic" src="person-circle.svg">
                         </div>
                         <div class="d-flex flex-column">
-                            <h3 class="mt-2 mb-0"><?php echo htmlspecialchars($rating['user_name']); ?></h3>
+                            <h3 class="mt-2 mb-0"><?php echo $rating['user_name']; ?></h3>
                             <div>
-                                <p class="text-left"><span
-                                        class="text-mutedpt"><?php echo htmlspecialchars($rating['star_rating']); ?>
-                                        Stars</span>
-                                    <span class="fa fa-star star-active ml-3"></span>
-                                    <span class="fa fa-star star-active"></span>
-                                    <span class="fa fa-star star-active"></span>
-                                    <span class="fa fa-star star-active"></span>
-                                    <span class="fa fa-star star-inactive"></span>
-                                </p>
+                                <p class="text-left"><span class="text-mutedpt"><?php echo $rating['star_rating']; ?>
+                                        Stars</span></p>
                             </div>
                         </div>
                     </div>
                     <div class="row text-left">
-                        <p class="content"><?php echo htmlspecialchars($rating['review_comment']); ?> </p>
+                        <p class="content"><?php echo $rating['review_comment']; ?> </p>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -378,10 +276,13 @@ $conn->close();
     <script>
         function checkLoginRating(movie_id) {
             <?php if (!isset($_SESSION['user_id'])): ?>
-                alert("Please log in to rate this movie.");
+                // If the user is not logged in, display an alert message
+                alert("Please log in or register to rate this movie.");
+                // link to login page 
                 window.location.href = 'login.php';
                 return false;
             <?php else: ?>
+                // If the user is logged in, then link to the rate_movie.php with the movie ID
                 window.location.href = 'rate_movie.php?id=' + movie_id;
                 return true;
             <?php endif; ?>

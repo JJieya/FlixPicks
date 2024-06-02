@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include 'db_connection.php'; 
+session_start();
 ?>
 
 
@@ -94,6 +95,13 @@ include 'db_connection.php';
     .last-row {
         margin-bottom: 0;
     }
+    .nav-item.right {
+      margin-left: auto;
+    }
+
+    .nav-link {
+      color: white;
+    }
   </style>
 </head>
 
@@ -108,7 +116,7 @@ include 'db_connection.php';
   <nav>
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link active" href="homepage.html" style="color: white;">HOME</a>
+        <a class="nav-link active" href="homepage.php" style="color: white;">HOME</a>
       </li>
       <li class="nav-item">
         <a class="nav-link active" href="movies.php" style="color: white;">MOVIES</a>
@@ -119,17 +127,25 @@ include 'db_connection.php';
       <li class="nav-item">
         <a class="nav-link" href="discussion.php" style="color: white;">DISCUSSION</a>
       </li>
+      <li class="nav-item right">
+        <?php if (isset($_SESSION['user_id'])): ?>
+          <a class="nav-link" href="logout.php">LOGOUT (<?php echo $_SESSION['username']; ?>)</a>
+        <?php else: ?>
+          <a class="nav-link" href="login.php">LOGIN</a>
+        <?php endif; ?>
+      </li>
     </ul>
   </nav>
 
   <div class="container mt-5">
     <div class="row">
     <?php
-    include 'db_connection.php';
-    session_start();
+    // include 'db_connection.php';
+    // session_start();
 
     if (!isset($_SESSION['user_id'])) {
       echo 'Login please!';
+      header('Location: login.php');
 
       return false;
     } else {
