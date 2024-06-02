@@ -78,13 +78,20 @@
       padding: 10px;
     }
 
-    .commentButton{
+    .commentButton {
       text-align: right;
       align-items: center;
       margin: auto;
       /* padding: 5px; */
       padding-top: 15px;
       padding-right: 40px;
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      margin-right: 10px;
     }
   </style>
 
@@ -165,7 +172,7 @@
       //   echo "Please login to start discussion.";
       //   exit;
       // }
-      $sql = "SELECT * FROM `forum`;";
+      $sql = "SELECT u.name, f.title, f.comment, f.created_at FROM forum f, users u WHERE u.id = f.user_id;";
 
       $result = $conn->query($sql);
 
@@ -178,11 +185,11 @@
             $count++;
 
             echo '<div class="discuss-card">';
-            echo '<h5 class="card-header">FEED:</h5>';
+
+            echo '<h5 class="card-header"><img class="profile-pic" src="person-circle.svg"/>' . $row["name"] . '</h5>';
             echo '<div class="discuss-body">';
             echo ' <h5 class="discuss-title">' . $row['title'] . '</h5>';
             echo ' <p class="discuss-text">' . $row['comment'] . '</p>';
-            echo '<div class="movie-title">' . $row["name"] . '</div>';
             echo '<p class="time-text"><small class="text-body-secondary">' . $row['created_at'] . '</small></p>';
             echo '<div class="commentButton">
             <button type="button" class="btn btn-success btn-sm" onclick="">Comment to this thread</button></div>';
