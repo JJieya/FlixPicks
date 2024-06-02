@@ -39,6 +39,23 @@ if (isset($_GET['id'])) {
         }
     }
 
+    $user_id = $_SESSION['user_id'];
+    $watchlistEnable = " select * from watchlist 
+    where user_id = ? and movie_id = ?";
+
+    $stmt_watchlist = $conn->prepare($watchlistEnable);
+    $stmt_watchlist->bind_param("ii",$userID, $movie_id);
+    $stmt_watchlist->execute();
+
+    $watchlistData = $stmt_watchlist->get_result();
+
+    $buttonDisable = false;
+
+    if($watchlistData->num_rows < 1) {
+        $buttonDisable = true;
+    }
+    
+
 } else {
     echo "No movie ID provided.";
     exit;
@@ -246,6 +263,11 @@ $conn->close();
         }
 
     </script>
+    
+
+
+
+
 </head>
 
 <body>

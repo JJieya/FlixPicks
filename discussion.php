@@ -80,6 +80,10 @@ if (!isset($_SESSION['user_id'])) {
       width: 94%;
     }
 
+    #dcalc {
+      display: none;
+    }
+
     .divider {
       border: 2px;
     }
@@ -109,6 +113,7 @@ if (!isset($_SESSION['user_id'])) {
   </style>
 
   <script>
+    
     function handleSubmit(title, comment) {
 
       console.log('title', title);
@@ -123,6 +128,7 @@ if (!isset($_SESSION['user_id'])) {
           },
           function (data, status) {
             alert("Discussion posted successfully");
+            location.reload();
           });
       }
       else {
@@ -182,9 +188,16 @@ if (!isset($_SESSION['user_id'])) {
       </div>
 
       <!-- discuss feed starts from here: -->
+      <!-- <div id="dcalc" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div> -->
+
       <?php
       include 'db_connection.php';
       session_start();
+
 
       $sql = "SELECT u.name, f.title, f.comment, f.created_at FROM forum f, users u WHERE u.id = f.user_id order by f.created_at desc;";
 
