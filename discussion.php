@@ -16,7 +16,7 @@ if (!isset($_SESSION['user_id'])) {
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" type="text/css" href="styleDiscuss.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="styleDiscuss.css" /> -->
 
   <!-- Bootstrap CSS -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -31,6 +31,127 @@ if (!isset($_SESSION['user_id'])) {
   <title>FLIXPICK</title>
 
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url("img_background.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    /* Overlay to adjust opacity */
+    #overlay {
+      background-color: rgba(0, 0, 0, 0.65);
+      /* Adjust opacity here */
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -4;
+    }
+
+    header {
+      background-color: rgba(152, 129, 129, 0);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      display: inline-flex;
+      align-items: left;
+    }
+
+    .logo-icon {
+      width: 45px;
+      /* Adjust size as needed */
+      height: auto;
+      /* Maintain aspect ratio */
+      margin-right: 10px;
+      /* Add spacing between icon and text */
+    }
+
+    .title {
+      color: #4caf50;
+      /* Green color */
+      font-size: 36px;
+      /* Larger font size */
+      font-weight: bold;
+      /* Bold font weight */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      /* Add a subtle 3D effect */
+    }
+
+    nav {
+      background-color: rgba(0, 100, 0, 0.7);
+      /* Dark green with 70% opacity */
+      overflow: hidden;
+    }
+
+    nav a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      /* Smooth transition for background color */
+    }
+
+    nav a:hover {
+      background-color: #ffd700;
+      /* Golden color */
+    }
+
+    .card-container {
+      width: 100%;
+      min-height: auto;
+      padding-left: 35px;
+      padding-top: 3%;
+      padding-bottom: 35px;
+
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      gap: 15px;
+      /* Add space between the cards */
+      /* padding: 20px; */
+      margin: auto;
+    }
+
+    .card {
+      /* background-color: #40380d81;
+      margin-left: 10px; */
+      /* margin: 10px; */
+      /* display: inline;
+      position: relative; */
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 70%;
+      /* Set a fixed width for the cards */
+      padding: 20px;
+      box-sizing: border-box;
+      /* Ensure padding is included in the width */
+      /* transition: transform 0.3s, box-shadow 0.3s; */
+    }
+
+    .form-label {
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+
     .discuss-card {
       background-color: white;
       border: 1px solid #ddd;
@@ -121,7 +242,7 @@ if (!isset($_SESSION['user_id'])) {
   </style>
 
   <script>
-    
+
     function handleSubmit(title, comment) {
 
       console.log('title', title);
