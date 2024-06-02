@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+   //checking if the user logged in or not:
+    if (!isset($_SESSION['user_id'])) {
+      echo "<script type='text/javascript'>alert('Please login to start discussion.');</script>";
+      header("Location: login.php");   
+      exit;
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -167,11 +180,6 @@
       include 'db_connection.php';
       session_start();
 
-      //checking if the user logged in or not:
-      // if (!isset($_SESSION['user_id'])) {
-      //   echo "Please login to start discussion.";
-      //   exit;
-      // }
       $sql = "SELECT u.name, f.title, f.comment, f.created_at FROM forum f, users u WHERE u.id = f.user_id;";
 
       $result = $conn->query($sql);
