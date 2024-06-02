@@ -2,12 +2,12 @@
 
 session_start();
 
-   //checking if the user logged in or not:
-    if (!isset($_SESSION['user_id'])) {
-      echo "<script type='text/javascript'>alert('Please login to start discussion.');</script>";
-      header("Location: login.php");   
-      exit;
-    }
+//checking if the user logged in or not:
+if (!isset($_SESSION['user_id'])) {
+  echo "<script type='text/javascript'>alert('Please login to start discussion.');</script>";
+  header("Location: login.php");
+  exit;
+}
 
 ?>
 
@@ -114,16 +114,22 @@ session_start();
       console.log('title', title);
       console.log('comment', comment);
 
-      $.post("discussDataSend.php",
-        {
-          title: title,
-          comment: comment,
+      if (!title == '' && !comment == '') {
+        $.post("discussDataSend.php",
+          {
+            title: title,
+            comment: comment,
 
-        },
-        function (data, status) {
-          alert("Discussion posted successfully");
-        });
+          },
+          function (data, status) {
+            alert("Discussion posted successfully");
+          });
+      }
+      else {
+        alert('forms cannot be empty.');
+      }
     }
+
 
   </script>
 </head>
@@ -162,11 +168,11 @@ session_start();
         <div class="mb-3">
           <div class="col-md-6">
             <!-- <label for="title" class="form-label">Discussion Title*</label> -->
-            <input type="text" class="form-control" id="title" placeholder="Give a Title">
+            <input type="text" class="form-control" id="title" placeholder="Give a Title" required>
           </div>
           <!-- <label for="title" class="form-label">Your Comment*</label> -->
-          <textarea class="form-control" id="comment"
-            placeholder="What do you think about your interested movie?"></textarea>
+          <textarea class="form-control" id="comment" placeholder="What do you think about your interested movie?"
+            required></textarea>
         </div>
         <div class="discussButton">
           <button type="button" class="btn btn-outline-success"
@@ -180,7 +186,7 @@ session_start();
       include 'db_connection.php';
       session_start();
 
-      $sql = "SELECT u.name, f.title, f.comment, f.created_at FROM forum f, users u WHERE u.id = f.user_id;";
+      $sql = "SELECT u.name, f.title, f.comment, f.created_at FROM forum f, users u WHERE u.id = f.user_id order by f.created_at desc;";
 
       $result = $conn->query($sql);
 
