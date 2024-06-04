@@ -167,11 +167,6 @@ $conn->close();
         }
 
     </script>
-
-
-
-
-
 </head>
 
 <body>
@@ -229,7 +224,6 @@ $conn->close();
                         onclick="checkLoginRating(<?php echo $movie_id; ?>)">Rate This Movie
                     </button>
 
-
                     <div style="padding-left: 30px">
                         <button class="btn btn-outline-success" id="watchStat" type="hidden"
                             onclick="checkLoginWatchlist(<?php echo $movie_id; ?>)">Save to Watchlist
@@ -239,7 +233,7 @@ $conn->close();
                 </div>
             </div>
         </div>
-     
+
         <div class="ratings">
             <h2>Ratings and Reviews</h2>
         </div>

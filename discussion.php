@@ -1,5 +1,7 @@
 <?php
 
+include 'db_connection.php';
+
 session_start();
 
 //checking if the user logged in or not:
@@ -16,16 +18,12 @@ if (!isset($_SESSION['user_id'])) {
 
 <head>
   <meta charset="UTF-8" />
-  <!-- <link rel="stylesheet" type="text/css" href="styleDiscuss.css" /> -->
 
   <!-- Bootstrap CSS -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script> -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <title>FLIXPICK</title>
@@ -109,22 +107,14 @@ if (!isset($_SESSION['user_id'])) {
       padding-left: 35px;
       padding-top: 3%;
       padding-bottom: 35px;
-
       display: flex;
       justify-content: space-around;
       align-items: flex-start;
       gap: 15px;
-      /* Add space between the cards */
-      /* padding: 20px; */
       margin: auto;
     }
 
     .card {
-      /* background-color: #40380d81;
-      margin-left: 10px; */
-      /* margin: 10px; */
-      /* display: inline;
-      position: relative; */
       background-color: white;
       border: 1px solid #ddd;
       border-radius: 8px;
@@ -133,8 +123,6 @@ if (!isset($_SESSION['user_id'])) {
       /* Set a fixed width for the cards */
       padding: 20px;
       box-sizing: border-box;
-      /* Ensure padding is included in the width */
-      /* transition: transform 0.3s, box-shadow 0.3s; */
     }
 
     .form-label {
@@ -187,10 +175,6 @@ if (!isset($_SESSION['user_id'])) {
     .col-md-6 {
       padding-top: 25px;
     }
-
-    /* .form-control {
-      margin: 10px;
-    } */
 
     #title {
       margin: 10px;
@@ -309,10 +293,8 @@ if (!isset($_SESSION['user_id'])) {
 
         <div class="mb-3">
           <div class="col-md-6">
-            <!-- <label for="title" class="form-label">Discussion Title*</label> -->
             <input type="text" class="form-control" id="title" placeholder="Give a Title" required>
           </div>
-          <!-- <label for="title" class="form-label">Your Comment*</label> -->
           <textarea class="form-control" id="comment" placeholder="What do you think about your interested movie?"
             required></textarea>
         </div>
@@ -323,18 +305,8 @@ if (!isset($_SESSION['user_id'])) {
         </div>
       </div>
 
-      <!-- discuss feed starts from here: -->
-      <!-- <div id="dcalc" class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-      </div> -->
-
+      <!-- Discussion View: -->
       <?php
-      include 'db_connection.php';
-      session_start();
-
-
       $sql = "SELECT u.name, f.title, f.comment, f.created_at FROM forum f, users u WHERE u.id = f.user_id order by f.created_at desc;";
 
       $result = $conn->query($sql);
@@ -358,8 +330,6 @@ if (!isset($_SESSION['user_id'])) {
             <button type="button" class="btn btn-success btn-sm" onclick="">Comment to this thread</button></div>';
             echo '</div>';
             echo '</div>';
-
-
             echo '<div class="divider">';
             echo '</div>';
           }
