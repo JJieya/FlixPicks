@@ -5,7 +5,10 @@ This project is a group assignment for web technology.
 
 <b>Live URL:</b> https://student-wsu.cdms.westernsydney.edu.au/~22056673/Assignment_2/homepage.php
 
-<h2>Database:</h2> Name: `db_22056673`
+Sample Login details: 
+
+- Email Address: munjerin@gmail.com
+- Password: 12345678
 
 <h4>Usages of this website:</h4>
 
