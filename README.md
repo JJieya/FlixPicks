@@ -3,6 +3,10 @@ This project is a group assignment for web technology.
 
 <b>Project:</b> FlixPicks, a movie review and recommendation website to help movie enthusiasts pick their next entertainment option.
 
+<b>Live URL:</b> https://student-wsu.cdms.westernsydney.edu.au/~22056673/Assignment_2/homepage.php
+
+<h2>Database:</h2> Name: `db_22056673`
+
 <h4>Usages of this website:</h4>
 
 * <h2>Homepage:</h2> Any user can enter our homepage by clicking on the URL without any entry restrictions. Under the Home section, you can access the search function, and see some movie cards.
